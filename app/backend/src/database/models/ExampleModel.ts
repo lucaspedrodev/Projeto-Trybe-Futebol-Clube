@@ -28,4 +28,3 @@ Example.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
 export default Example;
-
