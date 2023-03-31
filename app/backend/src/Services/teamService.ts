@@ -7,6 +7,10 @@ class TeamsService implements ITeamsService {
   async getAllTeams(): Promise<ITeam[]> {
     return this._model.findAll();
   }
+
+  async teamById(id: number): Promise<ITeam | null> {
+    return this._model.findByPk(id);
+  }
 }
 
 export default TeamsService;
