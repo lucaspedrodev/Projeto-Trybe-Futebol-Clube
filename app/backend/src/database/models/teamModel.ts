@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize';
+import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
 class TeamModel extends Model {
@@ -7,13 +7,22 @@ class TeamModel extends Model {
 }
 
 TeamModel.init({
-  teamName: DataTypes.STRING,
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: INTEGER,
+  },
+  teamName: {
+    field: 'team_name',
+    allowNull: false,
+    type: STRING,
+  },
 }, {
-  sequelize: db,
-  modelName: 'TeamModel',
-  timestamps: false,
-  tableName: 'teams',
   underscored: true,
+  sequelize: db,
+  modelName: 'teams',
+  timestamps: false,
 });
 
 export default TeamModel;
