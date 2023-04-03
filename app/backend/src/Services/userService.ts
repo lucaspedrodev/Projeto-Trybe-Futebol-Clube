@@ -8,7 +8,6 @@ class UserService {
 
   public async login(email: string, password: string): Promise<ILogin> {
     const result = await this._model.findOne({ where: { email } });
-
     if (!result) return { type: 401, message: 'Invalid email or password' };
 
     const passwordCheck = bcrypt.compareSync(password, result.password);

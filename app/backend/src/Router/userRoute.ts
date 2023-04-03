@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import UserController from '../Controllers/userController';
-import { emailPassValidation } from '../Middlewares/loginMiddlewares';
+import {
+  fieldsValidation, emailValidation, passwordValidation } from '../Middlewares/loginMiddlewares';
 
 const userRouter = Router();
 
@@ -8,7 +9,9 @@ const userController = new UserController();
 
 userRouter.post(
   '/',
-  emailPassValidation,
+  fieldsValidation,
+  emailValidation,
+  passwordValidation,
   (req: Request, res: Response) => userController.login(req, res),
 );
 
