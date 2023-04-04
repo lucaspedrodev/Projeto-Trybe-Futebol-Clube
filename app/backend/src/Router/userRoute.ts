@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express';
 import UserController from '../Controllers/userController';
 import {
-  fieldsValidation, emailValidation, passwordValidation } from '../Middlewares/loginMiddlewares';
+  fieldsValidation,
+  emailValidation, passwordValidation, tokensValidate } from '../Middlewares/loginMiddlewares';
 
 const userRouter = Router();
 
@@ -14,5 +15,9 @@ userRouter.post(
   passwordValidation,
   (req: Request, res: Response) => userController.login(req, res),
 );
-
+userRouter.get(
+  '/role',
+  tokensValidate,
+  (req: Request, res: Response) => userController.loginRole(req, res),
+);
 export default userRouter;

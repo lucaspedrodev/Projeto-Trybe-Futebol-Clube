@@ -8,6 +8,6 @@ export interface IUser {
 
 export interface ILogin {
   type: number | null;
-  message: string
+  message?: string
   token?: string
 }

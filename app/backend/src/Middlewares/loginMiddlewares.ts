@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { validateToken } from './token';
 
 const fieldsValidation = (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -31,4 +32,35 @@ const passwordValidation = (req: Request, res: Response, next: NextFunction) => 
   next();
 };
 
-export { fieldsValidation, emailValidation, passwordValidation };
+const tokensValidate = async (req:Request, res:Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({
+      message: 'Token not found',
+    });
+  }
+  try {
+    const payload = validateToken(authorization);
+    req.body.token = payload;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      message: 'Token must be a valid token',
+    });
+  }
+};
+
+// const tokensValidate = (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     const { authorization } = req.headers;
+//     const token = authorization as string;
+//     const payload = validateToken(token);
+//     if (!payload) {
+//       return res.status(401).json({ message: 'Token must be a valid token' });
+//     }
+//     next();
+//   } catch (error) {
+//     return null;
+//   }
+// };
+export { fieldsValidation, emailValidation, passwordValidation, tokensValidate };
