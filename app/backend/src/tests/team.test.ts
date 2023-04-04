@@ -27,9 +27,13 @@ describe('Testa a rota /teams', () => {
   });
 
   it('Testa se a rota /teams/id retorna um time pelo seu ID', async () => {
-    const response = await chai.request(app).get('/teams/5')
-    sinon.stub(TeamModel, 'findByPk').resolves(Mocks.teamByIdMock as TeamModel)
-    expect(response.status).to.be.equal(200);
-    expect(response.body).to.deep.equal(Mocks.teamByIdMock as TeamModel);
+    sinon.stub(TeamModel, 'findByPk').resolves(Mocks.allteamsMock[0] as TeamModel);
+
+    const response = await chai.request(app).get('/teams/1');
+
+    expect(response.body).to.be.deep.equal(Mocks.allteamsMock[0]);
+    expect(response.status).to.be.deep.equal(200);
+
+    (TeamModel.findByPk as sinon.SinonStub).restore();
   })
 });

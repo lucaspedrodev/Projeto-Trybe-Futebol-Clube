@@ -65,10 +65,10 @@ const allteamsMock = [
     }
   ]
 
-  const teamByIdMock =   {
+  const teamByIdMock =    {
     "id": 5,
     "teamName": "Cruzeiro melhor do Brasil"
-  }
+  } 
 
   const mocks = { allteamsMock, teamByIdMock}
 
