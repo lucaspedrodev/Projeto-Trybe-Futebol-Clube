@@ -14,6 +14,11 @@ class MatchesService {
     });
     return resultModel;
   }
+
+  public async finish(id: string) {
+    const finished = await this._model.update({ inProgress: false }, { where: { id } });
+    return finished;
+  }
 }
 
 export default MatchesService;
