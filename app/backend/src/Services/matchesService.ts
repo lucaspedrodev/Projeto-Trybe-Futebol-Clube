@@ -28,6 +28,11 @@ class MatchesService {
 
   public async createMatch(matchs: ICreateNewMatch) {
     const { homeTeamGoals, homeTeamId, awayTeamGoals, awayTeamId } = matchs;
+    // const teamId = await TeamModel.findOne({ where: { id: homeTeamId || awayTeamId } });
+    // if (!teamId) {
+    //   const status = { type: 404, message: 'There is no team with such id!' };
+    //   return status;
+    // }
     const result = this._model.create({
       homeTeamGoals,
       homeTeamId,
