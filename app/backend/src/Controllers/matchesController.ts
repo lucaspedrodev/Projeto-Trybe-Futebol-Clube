@@ -32,4 +32,12 @@ export default class MatcherController {
     await this._service.updateMatch(id, { homeTeamGoals, awayTeamGoals });
     return res.status(200).json({ message: 'Updated' });
   };
+
+  public createMatch = async (req: Request, res: Response) => {
+  // const { homeTeamGoals, homeTeamId, awayTeamGoals, awayTeamId } = req.body;
+
+    const result = await this._service.createMatch(req.body);
+
+    return res.status(201).json(result);
+  };
 }
